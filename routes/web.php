@@ -7,6 +7,8 @@ use App\Http\Controllers\TaskController;
 
 // Route untuk menampilkan tasks berdasarkan tasklist_id
 Route::get('/tasklist/{id}/tasks', [TaskController::class, 'showTasks'])->name('tasks.show');
+Route::post('/tasks/{id}/move', [TaskController::class, 'moveTask'])->name('moveTask');
+
 
 
 Route::get('/departemen', [MasterDepartemenController::class, 'index']);
