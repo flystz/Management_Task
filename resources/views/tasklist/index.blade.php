@@ -11,12 +11,15 @@
 
 </head>
 <body>
+
+
     <x-sidebar></x-sidebar>
     
   
 <!-- Content -->
   <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
     <!-- your content goes here ... -->
+     
   
     <div class="container mx-auto mt-10">
         <h2 class="text-2xl font-bold mb-6">Tasklist</h2>

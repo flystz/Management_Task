@@ -5,40 +5,28 @@ use App\Http\Controllers\MasterDepartemenController;
 use App\Http\Controllers\TasklistController;
 use App\Http\Controllers\TaskController;
 
-// Route untuk menampilkan tasks berdasarkan tasklist_id
-Route::get('/tasklist/{id}/tasks', [TaskController::class, 'showTasks'])->name('tasks.show');
-Route::post('/tasks/{id}/move', [TaskController::class, 'moveTask'])->name('moveTask');
 
+
+    
 
 
 Route::get('/departemen', [MasterDepartemenController::class, 'index']);
-
-// Route::get('/task/{id}', [TaskController::class, 'task'])->name('task.task');
-
-Route::get('/task/{id}', function ($id) {
-    return view('components.task', ['taskId' => $id]);
-})->name('task.show');
-
-
-Route::get('/', function () {
-    return view('dashboard');
-    //ini tu ke welcome.blade.php
-    //ketika user klik dashboard masuk ke dashboard.blade.php
-});
-
-
-Route::get('/task', function () {
-    return view('task');
-    //ini tu ke task.blade.php
-    //ketika user klik task yg ada di departemen masuk ke task.blade.php
-});
-
-Route::get('/add-task', function () {
-    return view('add-task');
-    //ini tu ke add-task.blade.php
-    //ketika user klik add task yg ada di list departemen masuk ke add-task.blade.php
-});
-
 Route::get('/departemen/{id}/tasklist', [TasklistController::class, 'showTasklist']);
 
+Route::get('/tasklist/{id}/tasks', [TaskController::class, 'showTasks'])->name('tasks.show');
+Route::post('/tasks/{id}/move', [TaskController::class, 'moveTask'])->name('moveTask');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/create/{id}', [TaskController::class, 'createTask'])->name('tasks.create');
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
+Route::view('/', 'welcome');    
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
